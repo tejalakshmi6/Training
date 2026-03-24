@@ -185,6 +185,8 @@ class Solution {
     }
 }
 
+HOLIDAY TASKS:
+
 1781
 class Solution {
     public int beautySum(String s) {
@@ -223,3 +225,74 @@ class Solution {
     }
 }
 
+75.
+class Solution {
+    public void sortColors(int[] nums) {
+        int zero = 0, one = 0, two = 0;
+        for (int n : nums) {
+            if (n == 0)
+                zero++;
+            if (n == 1)
+                one++;
+            if (n == 2)
+                two++;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (zero > 0) {
+                nums[i] = 0;
+                zero--;
+            } else if (one > 0) {
+                nums[i] = 1;
+                one--;
+            } else {
+                nums[i] = 2;
+                two--;
+            }
+        }
+    }
+}
+
+11.
+class Solution {
+    public int maxArea(int[] height) {
+        int max = -1;
+        int l = 0, r = height.length - 1;
+        while (1 <= r) {
+            int area = Math.min(height[l], height[r]) * (r - l);
+            max = Math.max(area, max);
+            if (height[l] < height[r]) {
+                l++;
+            } else {
+                r--;
+            }
+        }
+        return max;
+    }
+}
+
+42.
+class Solution {
+    public int trap(int[] height) {
+        int unit = 0, lmax = 0, rmax = 0;
+        int l = 0, r = height.length - 1;
+        while (l <= r) {
+            if (height[l] < height[r]) {
+                if (height[l] > lmax) {
+                    lmax = height[l];
+                } else {
+                    unit += (lmax - height[l]);
+                }
+                l++;
+            } else {
+                if (height[r] > rmax) {
+                    rmax = height[r];
+                } else {
+                    unit += (rmax - height[r]);
+                }
+                r--;
+            }
+        }
+        return unit;
+    }
+}
+----------
