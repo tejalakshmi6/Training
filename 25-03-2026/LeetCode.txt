@@ -1,0 +1,94 @@
+3232.
+class Solution {
+    public boolean canAliceWin(int[] nums) {
+        int sing=0, doub=0;
+        for(int n: nums){
+            if(n>=10)  doub+=n;
+            else sing+=n;
+        }
+        return (sing!=doub);
+    }
+}
+
+189.
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length - 1;
+        k = k % (n + 1);
+        reverse(nums, 0, n);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, n);
+    }
+
+    static void reverse(int[] nums, int st, int end) {
+        while (st < end) {
+            int temp = nums[st];
+            nums[st] = nums[end];
+            nums[end] = temp;
+            st++;
+            end--;
+        }
+    }
+}
+
+1470.
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+        int[] res = new int[2 * n];
+        int ind1 = 0, ind2 = n;
+        for (int i = 0; i < nums.length; i += 2) {
+            res[i] = nums[ind1++];
+            res[i + 1] = nums[ind2++];
+        }
+        return res;
+    }
+}
+
+345.
+class Solution {
+    public String reverseVowels(String s) {
+        char[] res = s.toCharArray();
+        int st = 0, end = s.length() - 1;
+        while (st < end) {
+            if (!isVowel(res[st]))
+                st++;
+            if (!isVowel(res[end]))
+                end--;
+            if (isVowel(res[st]) && isVowel(res[end])) {
+                char temp = res[st];
+                res[st] = res[end];
+                res[end] = temp;
+                st++; end--;
+            }
+        }
+        return new String(res);
+    }
+
+    boolean isVowel(char ch) {
+        ch = Character.toLowerCase(ch);
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+            return true;
+        }
+        return false;
+    }
+}
+
+1768.
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+        StringBuilder result = new StringBuilder();
+        int i = 0, j = 0;
+
+        while (i < m || j < n) {
+            if (i < m) {
+                result.append(word1.charAt(i++));
+            }
+            if (j < n) {
+                result.append(word2.charAt(j++));
+            }
+        }
+        return result.toString();
+    }
+}
