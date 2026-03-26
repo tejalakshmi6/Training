@@ -19,6 +19,7 @@ class Email extends Notification{
     Email(String name, String msg){
         super(name, msg);
     }
+    @Override
     void send(){
         System.out.println("Sending Email Notification to "+name);
         System.out.println("Message: "+msg);
@@ -32,6 +33,7 @@ class SMS extends Notification{
     SMS(String name, String msg){
         super(name, msg);
     }
+    @Override
     void send(){
         System.out.println("Sending SMS Notification to "+name);
         System.out.println("Message: "+msg);
@@ -42,17 +44,24 @@ public class Notify {
     public static void main(String args[]){
         Notification n = new Email("Thaslima","Order Confirmed");
         n.send();
+        System.out.println();
+
         /*
-        n.changeEmail();
+        n.changeEmail(); // child class method can be called using parent class
         cannot access this method as it is only defined in child class and not in paret class
-        */
-        System.out.println("-------------");
-        Email e = new Email("Kiwi","Hi cutie");
+
+        Email e = new Email("Kiwi","Hi Kiwi");
         e.send();
         e.mute(); //parent class method can be called using child class
         e.changeEmail();
-        System.out.println("-------------");
+        */
+
+        Email e = new Email("Kiwi","Hi Kiwi");
         SMS s = new SMS("Supu", "Call me");
-        s.send();
+        Notification[] notify = {e,s};
+        for(Notification i: notify){
+            i.send();
+            System.out.println();
+        }
     }
 }
