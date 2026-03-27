@@ -1,0 +1,84 @@
+DAY 8
+
+54.
+(DAY 7 task)
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> list = new ArrayList<Integer>();
+        int top = 0, bot = matrix.length - 1;
+        int left = 0, right = matrix[0].length - 1;
+        while (top <= bot && left <= right) {
+            for (int i = left; i <= right; i++) {
+                list.add(matrix[top][i]);
+            }
+            top++;
+            for (int i = top; i <= bot; i++) {
+                list.add(matrix[i][right]);
+            }
+            right--;
+            if (top <= bot) {
+                for (int i = right; i >= left; i--) {
+                    list.add(matrix[bot][i]);
+                }
+                bot--;
+            }
+            if (left <= right) {
+                for (int i = bot; i >= top; i--) {
+                    list.add(matrix[i][left]);
+                }
+                left++;
+            }
+        }
+        return list;
+    }
+}
+
+----------
+27-03-2026
+
+3163.
+class Solution {
+    public String compressedString(String word) {
+        StringBuilder comp = new StringBuilder();
+        int count = 1;
+        int i, n = word.length();
+        for (i = 1; i < n; i++) {
+            if (word.charAt(i) == word.charAt(i - 1) && count < 9) {
+                count++;
+            } else {
+                comp.append(count).append(word.charAt(i - 1));
+                count = 1;
+            }
+        }
+        comp.append(count).append(word.charAt(i - 1));
+        return comp.toString();
+    }
+}
+
+6. ZigZag
+class Solution {
+    public String convert(String s, int row) {
+        StringBuilder[] sb = new StringBuilder[row];
+        for (int j = 0; j < row; j++) {
+            sb[j] = new StringBuilder();
+        }
+        int i = 0, n = s.length();
+        while (i < n) {
+            for (int j = 0; j < row; j++) {
+                if (i == n)
+                    break;
+                sb[j].append(s.charAt(i++));
+            }
+            for (int j = row - 2; j > 0; j--) {
+                if (i == n)
+                    break;
+                sb[j].append(s.charAt(i++));
+            }
+        }
+        StringBuilder res = new StringBuilder();
+        for (int j = 0; j < row; j++) {
+            res.append(sb[j]);
+        }
+        return res.toString();
+    }
+}
