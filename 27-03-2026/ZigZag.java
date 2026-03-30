@@ -10,18 +10,13 @@ public class ZigZag{
         for (int j = 0; j < row; j++) {
             sb[j] = new StringBuilder();
         }
-        int i = 0, n = s.length();
-        while (i < n) {
-            for (int j = 0; j < row; j++) {
-                if (i == n)
-                    break;
-                sb[j].append(s.charAt(i++));
-            }
-            for (int j = row - 2; j > 0; j--) {
-                if (i == n)
-                    break;
-                sb[j].append(s.charAt(i++));
-            }
+        boolean upward = true;
+        int cur = 0;
+        for (char c: s.toCharArray()) {
+            sb[cur].append(c);
+            if( cur==0 || cur==row-1 ) upward = !upward;
+            cur += upward ? -1 : 1;
+
         }
         StringBuilder res = new StringBuilder();
         for (int j = 0; j < row; j++) {
