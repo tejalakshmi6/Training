@@ -1,0 +1,66 @@
+387.
+class Solution {
+    public int firstUniqChar(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (map.get(ch) == 1)
+                return i;
+        }
+        return -1;
+    }
+}
+
+242.
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        Map<Character, Integer> map1 = new HashMap<>();
+        Map<Character, Integer> map2 = new HashMap<>();
+        for(char c: s.toCharArray()){
+            map1.put(c, map1.getOrDefault(c, 0)+1);
+        }
+        for(char c: t.toCharArray()){
+            map2.put(c, map2.getOrDefault(c, 0)+1);
+        }
+        if(map1.equals(map2))return true;
+        else return false;
+    }
+}
+
+169.
+class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (Integer n : nums) {
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+        int max = -1, res = -1;
+        for (int n : nums) {
+            if (max < map.get(n)) {
+                max = map.get(n);
+                res = n;
+            }
+        }
+        return res;
+    }
+}
+
+383.
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (Character ch : magazine.toCharArray()) {
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+        for (Character ch : ransomNote.toCharArray()) {
+            if (!map.containsKey(ch) || map.get(ch) == 0)
+                return false;
+            map.put(ch, map.getOrDefault(ch, 0) - 1);
+        }
+        return true;
+    }
+}
+
