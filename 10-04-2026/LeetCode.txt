@@ -1,0 +1,40 @@
+347.
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        // 1. Counting Frequency using HashMap
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int n : nums) {
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+        // 2. Adding map to ArrayList to Sort
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(map.entrySet());
+        Collections.sort(list, (a, b) -> b.getValue() - a.getValue());
+        // 3. 
+        int[] res = new int[k];
+        int i = 0;
+        for (Map.Entry<Integer, Integer> m : list) {
+            if (i < k)
+                res[i++] = m.getKey();
+        }
+        return res;
+    }
+}
+
+560.
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+        int sum = 0;
+        int count = 0;
+        for (int n : nums) {
+            sum += n;
+            if (map.containsKey(sum - k)) {
+                count += map.get(sum - k);
+            }
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+}
+
