@@ -1,0 +1,74 @@
+771.
+class Solution {
+    public int numJewelsInStones(String jewels, String stones) {
+        int count = 0;
+        Set<Character> set = new HashSet<>();
+        for (char ch : jewels.toCharArray()) {
+            set.add(ch);
+        }
+        for (char ch : stones.toCharArray()) {
+            if (set.contains(ch))
+                count++;
+        }
+        return count;
+    }
+}
+
+1832.
+class Solution {
+    public boolean checkIfPangram(String sentence) {
+        int[] freq = new int[26];
+        boolean res = true;
+        for (char ch : sentence.toCharArray()) {
+            freq[ch - 'a']++;
+        }
+        for (int i : freq) {
+            if (i == 0)
+                res = false;
+        }
+        return res;
+    }
+}
+
+819.
+class Solution {
+    public String mostCommonWord(String para, String[] banned) {
+        para = para.toLowerCase();
+        para = para.replaceAll("[^a-z]"," ");
+        HashMap<String, Integer> map = new HashMap<>();
+        Set<String> set = new HashSet<>();
+        String[] words = para.split("\\s+");
+        for (String b : banned) {
+            set.add(b);
+        }
+        for (String w : words) {
+            if (!set.contains(w))
+                map.put(w, map.getOrDefault(w, 0) + 1);
+        }
+        int max = 0;
+        String res = "";
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (max < entry.getValue()) {
+                max = entry.getValue();
+                res = entry.getKey();
+            }
+        }
+        return res;
+    }
+}
+
+452.
+class Solution {
+    public int findMinArrowShots(int[][] points) {
+        int arrows = 1;
+        Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1]));
+        int end = points[0][1];
+        for (int i = 0; i < points.length; i++) {
+            if (points[i][0] > end) {
+                arrows++;
+                end = points[i][1];
+            }
+        }
+        return arrows;
+    }
+}
