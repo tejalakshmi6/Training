@@ -1,0 +1,18 @@
+350.
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums1) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        int i = 0;
+        int[] res = new int[Math.max(nums1.length, nums2.length)];
+        for (int n : nums2) {
+            if (map.containsKey(n) && map.get(n) > 0) {
+                res[i++] = n;
+                map.put(n, map.get(n) - 1);
+            }
+        }
+        return Arrays.copyOf(res, i);
+    }
+}
